@@ -42,12 +42,9 @@ public class GameManager : MonoBehaviour
 
     private void DrawCard()
     {
-        GameObject instance = Instantiate(animalCard, lanePositionOne, Quaternion.identity);
-        instance.transform.SetParent(GUICanvas.transform, false);
-        // instance.transform = cardSlotOne.transform;
-        RectTransform rectTransform = instance.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(90, 90);
-        UnitManager script = instance.GetComponent<UnitManager>();
+        GameObject instance = Instantiate(animalCard);
+        instance.transform.SetParent(cardSlotOne.transform, false);
+        Card script = instance.GetComponent<Card>();
         if (script != null)
         {
             script.Initialize("lion");
