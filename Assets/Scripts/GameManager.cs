@@ -13,13 +13,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject animalCard;
     [SerializeField] private GameObject modifierCard;
     [SerializeField] private GameObject cardSlotOne;
+    [SerializeField] private GameObject cardSlotTwo;
+    [SerializeField] private GameObject cardSlotThree;
+    [SerializeField] private GameObject cardSlotFour;
+    [SerializeField] private GameObject cardSlotFive;
     [SerializeField] private GameObject GUICanvas;
     private static List<string> playerDeck = new List<string>();
+    private static List<string> discardPile = new List<string>();
+    private int amountOfCardsInHand;
 
     void Start()
     {
         SpawnUnit();
-
         for (int x = 0; x < 5; x++)
         {
             Instantiate(node, lanePositionOne, Quaternion.identity);
@@ -30,7 +35,10 @@ public class GameManager : MonoBehaviour
             lanePositionThree.y += 2;
         }
         PopulateOriginalDeck();
-        Debug.Log("Deck Amount: " + playerDeck.Count);
+        DrawCard();
+        DrawCard();
+        DrawCard();
+        DrawCard();
         DrawCard();
     }
 
@@ -66,8 +74,6 @@ public class GameManager : MonoBehaviour
             list[k] = list[n];
             list[n] = temp;
         }
-        Debug.Log("List: " + list[0]);
-        // return list;
     }
 
     private void SpawnUnit()
@@ -86,7 +92,8 @@ public class GameManager : MonoBehaviour
         if (playerDeck.Count > 0)
         {
             drawnCard = playerDeck[0];
-            Debug.Log(drawnCard);
+            discardPile.Add(playerDeck[0]);
+            playerDeck.RemoveAt(0);
         }
         else
         {
@@ -96,7 +103,7 @@ public class GameManager : MonoBehaviour
         if (drawnCard == "lion" || drawnCard == "bear" || drawnCard == "llama")
         {
             GameObject instance = Instantiate(animalCard);
-            instance.transform.SetParent(cardSlotOne.transform, false);
+            SetCardPositionInHand(instance);
             Card script = instance.GetComponent<Card>();
             if (script != null)
             {
@@ -106,12 +113,37 @@ public class GameManager : MonoBehaviour
         else
         {
             GameObject instance = Instantiate(modifierCard);
-            instance.transform.SetParent(cardSlotOne.transform, false);
+            SetCardPositionInHand(instance);
             Card script = instance.GetComponent<Card>();
             if (script != null)
             {
                 script.Initialize(drawnCard);
             }
+        }
+        amountOfCardsInHand += 1;
+    }
+
+    private void SetCardPositionInHand(GameObject instance)
+    {
+        if (amountOfCardsInHand == 0)
+        {
+            instance.transform.SetParent(cardSlotOne.transform, false);
+        }
+        else if (amountOfCardsInHand == 1)
+        {
+            instance.transform.SetParent(cardSlotTwo.transform, false);
+        }
+        else if (amountOfCardsInHand == 2)
+        {
+            instance.transform.SetParent(cardSlotThree.transform, false);
+        }
+        else if (amountOfCardsInHand == 3)
+        {
+            instance.transform.SetParent(cardSlotFour.transform, false);
+        }
+        else if (amountOfCardsInHand == 4)
+        {
+            instance.transform.SetParent(cardSlotFive.transform, false);
         }
     }
 }
