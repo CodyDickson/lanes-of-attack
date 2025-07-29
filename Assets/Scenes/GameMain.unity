@@ -156,6 +156,7 @@ MonoBehaviour:
   playerUnit: {fileID: 3978494979238028375, guid: 7dede274d1e1ed248a5e3b23d5229b71, type: 3}
   animalCard: {fileID: 462278253043776788, guid: cf788f2be674f344598056bf67030683, type: 3}
   cardSlotOne: {fileID: 365315360}
+  GUICanvas: {fileID: 2096806950}
 --- !u!4 &109945283
 Transform:
   m_ObjectHideFlags: 0

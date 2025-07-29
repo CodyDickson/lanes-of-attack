@@ -17,8 +17,8 @@ public class Card : MonoBehaviour
         switch (type)
         {
             case "lion": SetImageOfChild(0); attackValue = 3; healthValue = 10; break;
-            case "bear": SetImageOfChild(0); attackValue = 8; healthValue = 5; break;
-            case "llama": SetImageOfChild(0); attackValue = 1; healthValue = 15; break;
+            case "bear": SetImageOfChild(1); attackValue = 8; healthValue = 5; break;
+            case "llama": SetImageOfChild(2); attackValue = 1; healthValue = 15; break;
             default: Debug.Log("ERROR: Card not set"); break;
         }
         text_attack.text = attackValue.ToString();

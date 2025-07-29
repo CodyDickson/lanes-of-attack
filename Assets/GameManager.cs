@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         Card script = instance.GetComponent<Card>();
         if (script != null)
         {
-            script.Initialize("lion");
+            script.Initialize("bear");
         }
     }
 }
