@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     private void SpawnUnit()
     {
         GameObject instance = Instantiate(playerUnit, lanePositionOne, Quaternion.identity);
-        UnitManager script = instance.GetComponent<UnitManager>();
+        Player script = instance.GetComponent<Player>();
         if (script != null)
         {
             script.Initialize("lion");
