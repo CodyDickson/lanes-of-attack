@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject node;
-    private Vector3 lanePositionOne = new Vector3(0, 0, 0);
-    private Vector3 lanePositionTwo = new Vector3(2, 0, 0);
-    private Vector3 lanePositionThree = new Vector3(4, 0, 0);
     [SerializeField] private GameObject playerUnit;
     [SerializeField] private GameObject animalCard;
     [SerializeField] private GameObject modifierCard;
@@ -20,45 +16,108 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject GUICanvas;
     private static List<string> playerDeck = new List<string>();
     private static List<string> discardPile = new List<string>();
+    private static List<Vector2> lane_starting_positions = new List<Vector2>();
+    private static List<Vector2> all_lane_positions = new List<Vector2>();
     private int amountOfCardsInHand;
+    private int handMax;
+    private int currentTurn;
+    private int numberOfLanes;
+    [SerializeField] int _amountOfPlayers;
 
     void Start()
     {
-        SpawnUnit();
-        for (int x = 0; x < 5; x++)
-        {
-            Instantiate(node, lanePositionOne, Quaternion.identity);
-            Instantiate(node, lanePositionTwo, Quaternion.identity);
-            Instantiate(node, lanePositionThree, Quaternion.identity);
-            lanePositionOne.y += 2;
-            lanePositionTwo.y += 2;
-            lanePositionThree.y += 2;
-        }
+        // Initial settings
+        handMax = 5;
+        currentTurn = 0;
+        numberOfLanes = 3;
+
         PopulateOriginalDeck();
-        DrawCard();
-        DrawCard();
-        DrawCard();
-        DrawCard();
-        DrawCard();
+        FillHand(handMax);
+        GenerateLane(numberOfLanes);
+    }
+
+    private void GenerateLane(int amount)
+    {
+        Vector2 vector2 = Vector2.zero;
+        
+        for (int i = 0; i < amount; i++)
+        {
+            int randomXorY = Random.Range(0,2);
+            int randomInt = Random.Range(1, 11);
+            if (randomXorY == 0)
+            {
+                vector2.x = randomInt;
+            }
+            else
+            {
+                vector2.y = randomInt;
+            }
+            bool starting_position_determined = false;
+            while (!starting_position_determined)
+            {
+                bool exists = lane_starting_positions.Contains(vector2);
+                if (!exists)
+                {
+                    starting_position_determined = true; lane_starting_positions.Add(vector2);
+                    all_lane_positions.Add(vector2);
+                }
+            }
+
+            int random_lane_length = Random.Range(5,11);
+
+            for (int j = 0; j < random_lane_length; j++)
+            {
+                if (randomXorY == 0)
+                {
+                    vector2.y = j;
+                }
+                else
+                {
+                    vector2.x = j;
+                }
+                Instantiate(node, vector2, Quaternion.identity);
+                all_lane_positions.Add(vector2);
+            }
+        }
+    }
+
+    private void FillHand(int max)
+    {
+        for (int i = 0; i < max; i++)
+        {
+            DrawCard();
+        }
     }
 
     private void PopulateOriginalDeck()
     {
-        playerDeck.Add("lion");
-        playerDeck.Add("lion");
-        playerDeck.Add("lion");
-        playerDeck.Add("bear");
-        playerDeck.Add("bear");
-        playerDeck.Add("bear");
-        playerDeck.Add("llama");
-        playerDeck.Add("llama");
-        playerDeck.Add("llama");
-        playerDeck.Add("attackModifier");
-        playerDeck.Add("attackModifier");
-        playerDeck.Add("attackModifier");
-        playerDeck.Add("healthModifier");
-        playerDeck.Add("healthModifier");
-        playerDeck.Add("healthModifier");
+        for (int x =  0; x < 3; x++)
+        {
+            // high movement
+            playerDeck.Add("scout");
+        }
+        for (int x = 0; x < 3; x++)
+        {
+            // high attack
+            playerDeck.Add("warrior");
+        }
+        for (int x = 0; x < 3; x++)
+        {
+            // ranged attack
+            playerDeck.Add("archer");
+        }
+        for (int x = 0; x < 5; x++)
+        {
+            playerDeck.Add("increase_attack");
+        }
+        for (int x = 0; x < 5; x++)
+        {
+            playerDeck.Add("increase_health");
+        }
+        for (int x = 0; x < 5; x++)
+        {
+            playerDeck.Add("grant_experience");
+        }
         ShuffleDeck(playerDeck);
     }
 
@@ -78,12 +137,12 @@ public class GameManager : MonoBehaviour
 
     private void SpawnUnit()
     {
-        GameObject instance = Instantiate(playerUnit, lanePositionOne, Quaternion.identity);
-        Player script = instance.GetComponent<Player>();
-        if (script != null)
-        {
-            script.Initialize("lion");
-        }
+        // GameObject instance = Instantiate(playerUnit, lanePositionOne, Quaternion.identity);
+        // Player script = instance.GetComponent<Player>();
+        // if (script != null)
+        //{
+            //script.Initialize("lion");
+        //}
     }
 
     private void DrawCard()

@@ -3,7 +3,17 @@ guid: eb3e56ade3ecfec41a9b54c9fb4e04f5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - node: {fileID: 6686012931075256608, guid: 77de5ab0a18d1704d86a6790ea2b94e2, type: 3}
+  - playerUnit: {fileID: 3978494979238028375, guid: 7dede274d1e1ed248a5e3b23d5229b71, type: 3}
+  - animalCard: {fileID: 462278253043776788, guid: cf788f2be674f344598056bf67030683, type: 3}
+  - modifierCard: {instanceID: 0}
+  - cardSlotOne: {instanceID: 0}
+  - cardSlotTwo: {instanceID: 0}
+  - cardSlotThree: {instanceID: 0}
+  - cardSlotFour: {instanceID: 0}
+  - cardSlotFive: {instanceID: 0}
+  - GUICanvas: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

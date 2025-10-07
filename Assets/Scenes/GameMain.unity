@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 109945283}
   - component: {fileID: 109945282}
+  - component: {fileID: 109945284}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -155,8 +156,14 @@ MonoBehaviour:
   node: {fileID: 6686012931075256608, guid: 77de5ab0a18d1704d86a6790ea2b94e2, type: 3}
   playerUnit: {fileID: 3978494979238028375, guid: 7dede274d1e1ed248a5e3b23d5229b71, type: 3}
   animalCard: {fileID: 462278253043776788, guid: cf788f2be674f344598056bf67030683, type: 3}
+  modifierCard: {fileID: 1201034637382912524, guid: 571e1ee12a7f28b44ae2f622dfc637e6, type: 3}
   cardSlotOne: {fileID: 365315360}
+  cardSlotTwo: {fileID: 618729977}
+  cardSlotThree: {fileID: 393926445}
+  cardSlotFour: {fileID: 1783923041}
+  cardSlotFive: {fileID: 961485907}
   GUICanvas: {fileID: 2096806950}
+  _amountOfPlayers: 0
 --- !u!4 &109945283
 Transform:
   m_ObjectHideFlags: 0
@@ -172,6 +179,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109945284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109945281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece7d868a3e17764aba6d29a44241fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &365315360
 GameObject:
   m_ObjectHideFlags: 0
